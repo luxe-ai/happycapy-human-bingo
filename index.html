@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>HappyCapy 真人賓果遊戲</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --orange-primary: #FF6B35;
+            --orange-light: #FF9066;
+            --orange-dark: #E64A1F;
+            --peach: #FFB5A0;
+            --cream: #FFF5F0;
+            --warm-white: #FFFCFA;
+            --soft-shadow: rgba(255, 107, 53, 0.15);
+            --text-dark: #2D1810;
+            --text-gray: #8B6858;
+            --card-bg: #FFFFFF;
+            --card-back: linear-gradient(135deg, #FF6B35 0%, #FF9066 100%);
+        }
+
+        body {
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(160deg, #FFF5F0 0%, #FFE8DC 50%, #FFD5C2 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Decorative background elements */
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::before {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.3) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            animation: float-blob 20s ease-in-out infinite;
+        }
+
+        body::after {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 181, 160, 0.3) 0%, transparent 70%);
+            bottom: -150px;
+            left: -150px;
+            animation: float-blob 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes float-blob {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 30px 0;
+            animation: slideDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: var(--orange-primary);
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .subtitle {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: var(--text-gray);
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            align-items: center;
+            margin: 25px 0;
+            animation: fadeIn 1s ease-out 0.3s backwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn {
+            font-family: 'Fredoka', sans-serif;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 4px 12px var(--soft-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--orange-primary) 0%, var(--orange-light) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px var(--soft-shadow);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--orange-primary);
+            border: 2px solid var(--orange-primary);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px) scale(1.05);
+            background: var(--cream);
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 8px;
+            background: white;
+            padding: 4px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .lang-btn {
+            font-family: 'Fredoka', sans-serif;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            background: transparent;
+            color: var(--text-gray);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, var(--orange-primary) 0%, var(--orange-light) 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Bingo Grid */
+        .bingo-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            animation: fadeIn 1.2s ease-out 0.5s backwards;
+        }
+
+        .bingo-cell {
+            aspect-ratio: 1;
+            perspective: 1000px;
+            cursor: pointer;
+            position: relative;
+            animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.3) rotate(-10deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+
+        /* Staggered entrance for each card */
+        .bingo-cell:nth-child(1) { animation-delay: 0.05s; }
+        .bingo-cell:nth-child(2) { animation-delay: 0.08s; }
+        .bingo-cell:nth-child(3) { animation-delay: 0.11s; }
+        .bingo-cell:nth-child(4) { animation-delay: 0.14s; }
+        .bingo-cell:nth-child(5) { animation-delay: 0.17s; }
+        .bingo-cell:nth-child(6) { animation-delay: 0.20s; }
+        .bingo-cell:nth-child(7) { animation-delay: 0.23s; }
+        .bingo-cell:nth-child(8) { animation-delay: 0.26s; }
+        .bingo-cell:nth-child(9) { animation-delay: 0.29s; }
+        .bingo-cell:nth-child(10) { animation-delay: 0.32s; }
+        .bingo-cell:nth-child(11) { animation-delay: 0.35s; }
+        .bingo-cell:nth-child(12) { animation-delay: 0.38s; }
+        .bingo-cell:nth-child(13) { animation-delay: 0.41s; }
+        .bingo-cell:nth-child(14) { animation-delay: 0.44s; }
+        .bingo-cell:nth-child(15) { animation-delay: 0.47s; }
+        .bingo-cell:nth-child(16) { animation-delay: 0.50s; }
+        .bingo-cell:nth-child(17) { animation-delay: 0.53s; }
+        .bingo-cell:nth-child(18) { animation-delay: 0.56s; }
+        .bingo-cell:nth-child(19) { animation-delay: 0.59s; }
+        .bingo-cell:nth-child(20) { animation-delay: 0.62s; }
+        .bingo-cell:nth-child(21) { animation-delay: 0.65s; }
+        .bingo-cell:nth-child(22) { animation-delay: 0.68s; }
+        .bingo-cell:nth-child(23) { animation-delay: 0.71s; }
+        .bingo-cell:nth-child(24) { animation-delay: 0.74s; }
+        .bingo-cell:nth-child(25) { animation-delay: 0.77s; }
+
+        .card-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+            transform-origin: center center;
+        }
+
+        .bingo-cell.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front,
+        .card-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-front {
+            background: white;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            transition: all 0.3s ease;
+        }
+
+        .card-front::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 20px;
+            padding: 3px;
+            background: linear-gradient(135deg, var(--peach), var(--orange-light));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .bingo-cell:hover .card-front {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.2);
+        }
+
+        .bingo-cell:hover .card-front::before {
+            opacity: 1;
+        }
+
+        .bingo-cell.marked .card-front {
+            background: linear-gradient(135deg, var(--orange-primary) 0%, var(--orange-light) 100%);
+            color: white;
+            border-color: var(--orange-primary);
+            animation: markPulse 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes markPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .bingo-cell.marked .card-front::before {
+            opacity: 0;
+        }
+
+        .bingo-cell.free .card-front {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: white;
+            border: 3px solid #FFD700;
+            font-weight: 700;
+            box-shadow: 0 6px 25px rgba(255, 215, 0, 0.4);
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 28px;
+            height: 28px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--orange-primary);
+            opacity: 0;
+            transform: scale(0) rotate(-45deg);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .bingo-cell.marked .checkmark {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+
+        .cell-text {
+            font-family: 'Fredoka', sans-serif;
+            font-size: clamp(0.85rem, 1.5vw, 1rem);
+            font-weight: 600;
+            line-height: 1.3;
+            color: inherit;
+            word-wrap: break-word;
+            max-width: 100%;
+        }
+
+        .cell-name {
+            margin-top: 8px;
+            font-size: 0.75rem;
+            opacity: 0.9;
+            font-weight: 500;
+            padding: 4px 8px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .card-back {
+            background: linear-gradient(135deg, var(--orange-primary) 0%, var(--orange-light) 100%);
+            transform: rotateY(180deg);
+            color: white;
+            gap: 4px;
+            padding: 8px;
+            justify-content: center;
+            align-items: stretch;
+            overflow: hidden;
+        }
+
+        .back-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: clamp(0.65rem, 1vw, 0.8rem);
+            font-weight: 600;
+            line-height: 1.1;
+            text-align: center;
+            margin-bottom: 2px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            max-height: 1.8em;
+            flex-shrink: 0;
+        }
+
+        .name-input {
+            width: 100%;
+            padding: 6px 8px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-family: 'Manrope', sans-serif;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            font-weight: 500;
+            flex-shrink: 0;
+        }
+
+        .name-input:focus {
+            outline: none;
+            border-color: white;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        .name-input::placeholder {
+            color: var(--text-gray);
+        }
+
+        .back-buttons {
+            display: flex;
+            gap: 4px;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        .back-btn {
+            flex: 1;
+            padding: 6px 8px;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .confirm-btn {
+            background: white;
+            color: var(--orange-primary);
+        }
+
+        .confirm-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .cancel-btn {
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background: rgba(0, 0, 0, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* Winner Modal */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .winner-modal {
+            background: white;
+            border-radius: 32px;
+            padding: 48px 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transform: scale(0.8) translateY(30px);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .winner-modal.show {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .winner-emoji {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            animation: celebrate 1s ease-in-out infinite;
+        }
+
+        @keyframes celebrate {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.1) rotate(-10deg); }
+            75% { transform: scale(1.1) rotate(10deg); }
+        }
+
+        .winner-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--orange-primary);
+            margin-bottom: 12px;
+        }
+
+        .winner-message {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        /* Rules Section */
+        .rules {
+            max-width: 700px;
+            margin: 30px auto;
+            padding: 24px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            animation: fadeIn 1s ease-out 0.7s backwards;
+        }
+
+        .rules-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--orange-primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .rules-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .rules-list li {
+            padding-left: 28px;
+            position: relative;
+            color: var(--text-gray);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .rules-list li::before {
+            content: '●';
+            position: absolute;
+            left: 8px;
+            color: var(--orange-primary);
+            font-size: 1.2rem;
+        }
+
+        /* Highlight reward rules */
+        .rules-list li:nth-child(n+6) {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.08) 0%, rgba(255, 181, 160, 0.08) 100%);
+            padding: 12px 12px 12px 28px;
+            margin-left: -12px;
+            margin-right: -12px;
+            border-radius: 12px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .rules-list li:nth-child(n+6)::before {
+            left: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            header {
+                padding: 20px 0;
+            }
+
+            .bingo-grid {
+                gap: 8px;
+                padding: 10px;
+            }
+
+            .card-front,
+            .card-back {
+                padding: 10px;
+                border-radius: 16px;
+            }
+
+            .card-back {
+                padding: 8px 6px;
+                gap: 3px;
+            }
+
+            .cell-text {
+                font-size: 0.8rem;
+            }
+
+            .back-title {
+                font-size: 0.6rem;
+                margin-bottom: 1px;
+            }
+
+            .name-input {
+                font-size: 0.7rem;
+                padding: 5px 6px;
+            }
+
+            .back-btn {
+                font-size: 0.65rem;
+                padding: 5px 6px;
+            }
+
+            .controls {
+                gap: 8px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+
+            .winner-modal {
+                padding: 36px 28px;
+            }
+
+            .winner-emoji {
+                font-size: 4rem;
+            }
+
+            .winner-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .subtitle {
+                font-size: 0.85rem;
+            }
+
+            .bingo-grid {
+                gap: 6px;
+            }
+
+            .card-front,
+            .card-back {
+                padding: 8px;
+                border-radius: 12px;
+            }
+
+            .card-back {
+                padding: 6px 5px;
+                gap: 3px;
+            }
+
+            .cell-text {
+                font-size: 0.7rem;
+            }
+
+            .cell-name {
+                font-size: 0.65rem;
+                margin-top: 4px;
+            }
+
+            .back-title {
+                font-size: 0.55rem;
+                line-height: 1.1;
+            }
+
+            .name-input {
+                font-size: 0.65rem;
+                padding: 4px 5px;
+            }
+
+            .back-btn {
+                font-size: 0.6rem;
+                padding: 4px 5px;
+            }
+
+            .checkmark {
+                width: 22px;
+                height: 22px;
+                font-size: 12px;
+                top: 6px;
+                right: 6px;
+            }
+
+            .rules {
+                padding: 20px;
+            }
+
+            .rules-title {
+                font-size: 1.1rem;
+            }
+
+            .rules-list li {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 id="title">HappyCapy 真人賓果</h1>
+            <p class="subtitle" id="subtitle">社交破冰遊戲 · 認識新朋友</p>
+            <div id="game-number" style="margin-top: 8px; font-size: 0.9rem; color: var(--text-gray); font-weight: 500;">
+                <span id="game-label-prefix">第</span> <span id="shuffle-count">1</span> <span id="game-label-suffix">局</span>
+            </div>
+        </header>
+
+        <div class="controls">
+            <div class="lang-switcher">
+                <button class="lang-btn active" onclick="switchLang('zh')">粵語</button>
+                <button class="lang-btn" onclick="switchLang('en')">English</button>
+            </div>
+            <button class="btn btn-primary" id="checkBtn" onclick="checkBingo()">檢查賓果</button>
+            <button class="btn btn-secondary" id="resetBtn" onclick="resetBoard()">清空標記</button>
+            <button class="btn btn-secondary" id="shuffleBtn" onclick="shuffleBoard()">重新洗牌</button>
+        </div>
+
+        <div class="bingo-grid" id="bingoGrid"></div>
+
+        <div class="rules">
+            <h2 class="rules-title" id="rulesTitle">📋 遊戲規則</h2>
+            <ul class="rules-list" id="rulesList">
+                <li>點擊卡片翻轉，輸入符合條件嘅朋友名字</li>
+                <li>已標記嘅卡片再點一下可以取消標記</li>
+                <li>完成橫線、直線或對角線即可賓果</li>
+                <li>中間格仔係免費格，自動標記</li>
+                <li>同朋友交流，認識更多新朋友！</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="closeWinner()">
+        <div class="winner-modal" id="winnerModal" onclick="event.stopPropagation()">
+            <div class="winner-emoji">🎉</div>
+            <h2 class="winner-title" id="winTitle">賓果！</h2>
+            <p class="winner-message" id="winMessage">恭喜你完成咗一條線！繼續搵更多連線啦~</p>
+            <button class="btn btn-primary" id="continueBtn" onclick="closeWinner()">繼續遊戲</button>
+        </div>
+    </div>
+
+    <script>
+        let lang = 'zh';
+        let boardIndices = []; // 固定的卡片索引，切换语言时保持不变
+        let cells = {};
+        let shuffleCount = 1; // 洗牌次数/局数
+
+        const i18n = {
+            zh: {
+                title: 'HappyCapy 真人賓果',
+                subtitle: '社交破冰遊戲 · 認識新朋友',
+                rulesTitle: '📋 遊戲規則',
+                checkBtn: '檢查賓果',
+                resetBtn: '清空標記',
+                shuffleBtn: '重新洗牌',
+                winTitle: '賓果！',
+                winMessage: '恭喜你完成咗一條線！繼續搵更多連線啦~',
+                continueBtn: '繼續遊戲',
+                free: '免費格<br>FREE',
+                placeholder: '輸入名字...',
+                confirm: '✓ 確認',
+                cancel: '✕ 取消',
+                noBingo: '未有賓果，繼續加油！💪',
+                confirmShuffle: '確定要重新洗牌咩？會清空所有標記。',
+                confirmReset: '確定要清空所有標記咩？',
+                gamePrefix: '第',
+                gameSuffix: '局',
+                rules: [
+                    '點擊卡片翻轉，輸入符合條件嘅朋友名字',
+                    '已標記嘅卡片再點一下可以取消標記',
+                    '完成橫線、直線或對角線即可賓果',
+                    '中間格仔係免費格，自動標記',
+                    '每個格子中嘅名字需要介紹真實故事，唔可以亂編',
+                    '🎁 第一個達成賓果並截圖嘅隊伍（限時5分鐘）每人獲得額外 500 credit',
+                    '🏆 達成賓果數量最多嘅隊伍每人獲得額外 200 credit',
+                    '✨ 其他達成賓果嘅隊伍每人都可獲得 200 credit'
+                ]
+            },
+            en: {
+                title: 'HappyCapy Human Bingo',
+                subtitle: 'Social Icebreaker · Meet New Friends',
+                rulesTitle: '📋 Game Rules',
+                checkBtn: 'Check Bingo',
+                resetBtn: 'Reset',
+                shuffleBtn: 'Shuffle',
+                winTitle: 'Bingo!',
+                winMessage: "Congrats! You've completed a line! Keep finding more!",
+                continueBtn: 'Continue',
+                free: 'Free Space<br>FREE',
+                placeholder: 'Enter name...',
+                confirm: '✓ Confirm',
+                cancel: '✕ Cancel',
+                noBingo: 'No bingo yet, keep going! 💪',
+                confirmShuffle: 'Shuffle and clear all marks?',
+                confirmReset: 'Clear all marks?',
+                gamePrefix: 'Round',
+                gameSuffix: '',
+                rules: [
+                    'Click a card to flip and enter a friend\'s name who matches',
+                    'Click a marked card again to unmark it',
+                    'Complete a row, column, or diagonal to win',
+                    'The center square is a free space (auto-marked)',
+                    'Each name must share their real story - no making things up!',
+                    '🎁 First team to achieve bingo with screenshot (within 5 min) gets 500 credits per person',
+                    '🏆 Team with the most bingos gets 200 credits per person',
+                    '✨ Other teams that achieve bingo also get 200 credits per person'
+                ]
+            }
+        };
+
+        // 卡片内容定义 - 每个卡片有中英文两个版本
+        const prompts = [
+            { zh: '用過 HappyCapy', en: 'Used HappyCapy' },
+            { zh: '独立安装过OpenClaw', en: 'Installed OpenClaw independently' },
+            { zh: '有技術背景', en: 'Has tech background' },
+            { zh: '無技術背景', en: 'Non-tech background' },
+            { zh: '用過 Claude Code', en: 'Used Claude Code' },
+            { zh: '用過 AI 編程工具', en: 'Used AI tools' },
+            { zh: '識寫code', en: 'Can code' },
+            { zh: '做過產品經理', en: 'Product manager' },
+            { zh: '做過設計師', en: 'Designer' },
+            { zh: '養寵物', en: 'Has a pet' },
+            { zh: '去過3個以上國家', en: 'Visited 3+ countries' },
+            { zh: '識講2種以上語言', en: 'Speaks 2+ languages' },
+            { zh: '用過 GitHub', en: 'Used GitHub' },
+            { zh: '寫過blog或文章', en: 'Written blogs' },
+            { zh: '做過開源貢獻', en: 'Open source contributor' },
+            { zh: '用過 API', en: 'Used APIs' },
+            { zh: '做過數據分析', en: 'Data analysis' },
+            { zh: '識用 Git', en: 'Uses Git' },
+            { zh: '做過演講/分享', en: 'Public speaking' },
+            { zh: '參加過黑客松', en: 'Hackathon participant' },
+            { zh: '用過 Docker', en: 'Used Docker' },
+            { zh: '做過創業/副業', en: 'Entrepreneur/Side project' },
+            { zh: '識彈樂器', en: 'Plays instrument' },
+            { zh: '鍾意飲咖啡', en: 'Loves coffee' }
+        ];
+
+        function shuffle(arr) {
+            const a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        // 检查名字是否已经被使用（不区分大小写，忽略空格）
+        function isNameUsed(name, currentIndex) {
+            const normalizedName = name.toLowerCase().replace(/\s+/g, '');
+            if (!normalizedName) return false;
+
+            for (const [index, data] of Object.entries(cells)) {
+                const idx = parseInt(index);
+                // 跳过当前格子和FREE格
+                if (idx === currentIndex || idx === 12) continue;
+
+                if (data.name) {
+                    const existingName = data.name.toLowerCase().replace(/\s+/g, '');
+                    if (existingName === normalizedName) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        function switchLang(newLang) {
+            if (newLang === lang) return;
+            lang = newLang;
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.includes(lang === 'zh' ? '粵' : 'En'));
+            });
+            updateText();
+            render(); // 只重新渲染，不重新洗牌
+        }
+
+        function updateText() {
+            const t = i18n[lang];
+            document.getElementById('title').textContent = t.title;
+            document.getElementById('subtitle').textContent = t.subtitle;
+            document.getElementById('rulesTitle').textContent = t.rulesTitle;
+            document.getElementById('checkBtn').textContent = t.checkBtn;
+            document.getElementById('resetBtn').textContent = t.resetBtn;
+            document.getElementById('shuffleBtn').textContent = t.shuffleBtn;
+            document.getElementById('winTitle').textContent = t.winTitle;
+            document.getElementById('winMessage').textContent = t.winMessage;
+            document.getElementById('continueBtn').textContent = t.continueBtn;
+            document.getElementById('game-label-prefix').textContent = t.gamePrefix;
+            document.getElementById('game-label-suffix').textContent = t.gameSuffix;
+
+            const rulesList = document.getElementById('rulesList');
+            const basicRules = t.rules.slice(0, 5);
+            const rewardRules = t.rules.slice(5);
+            const rewardTitle = lang === 'zh' ? '💰 獎勵機制' : '💰 Rewards';
+
+            rulesList.innerHTML =
+                basicRules.map(rule => `<li>${rule}</li>`).join('') +
+                `<li style="list-style: none; margin: 16px 0 8px -28px; padding: 0; font-weight: 700; color: var(--orange-primary); font-size: 1.05rem;">${rewardTitle}</li>` +
+                rewardRules.map(rule => `<li>${rule}</li>`).join('');
+        }
+
+        function init() {
+            // 洗牌并创建固定的索引数组
+            boardIndices = shuffle([...Array(24).keys()]);
+            // 在中间插入 FREE 卡片标记
+            boardIndices.splice(12, 0, 'FREE');
+            cells = { 12: { marked: true, name: '' } };
+            render();
+        }
+
+        function render(skipAnimation = false) {
+            const grid = document.getElementById('bingoGrid');
+            const t = i18n[lang];
+            grid.innerHTML = '';
+
+            boardIndices.forEach((idx, i) => {
+                const cell = document.createElement('div');
+                cell.className = 'bingo-cell';
+                const data = cells[i] || { marked: false, name: '' };
+
+                if (idx === 'FREE') {
+                    cell.classList.add('free', 'marked');
+                    cell.innerHTML = `<div class="card-inner"><div class="card-front"><div class="cell-text">${t.free}</div></div></div>`;
+                } else {
+                    // 根据当前语言获取卡片文本
+                    const text = prompts[idx][lang];
+
+                    if (data.marked) cell.classList.add('marked');
+
+                    cell.innerHTML = `
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <div class="checkmark">✓</div>
+                                <div class="cell-text">${text}</div>
+                                ${data.name ? `<div class="cell-name">${data.name}</div>` : ''}
+                            </div>
+                            <div class="card-back">
+                                <div class="back-title">${text}</div>
+                                <input type="text" class="name-input" placeholder="${t.placeholder}" value="${data.name || ''}">
+                                <div class="back-buttons">
+                                    <button class="back-btn confirm-btn">${t.confirm}</button>
+                                    <button class="back-btn cancel-btn">${t.cancel}</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                    cell.onclick = e => {
+                        if (e.target.tagName === 'INPUT' || e.target.closest('button')) return;
+                        if (data.marked) {
+                            delete cells[i];
+                            render();
+                        } else {
+                            cell.classList.add('flipped');
+                            setTimeout(() => cell.querySelector('input').focus(), 300);
+                        }
+                    };
+
+                    const input = cell.querySelector('input');
+                    const confirmBtn = cell.querySelector('.confirm-btn');
+                    const cancelBtn = cell.querySelector('.cancel-btn');
+
+                    confirmBtn.onclick = () => {
+                        const name = input.value.trim();
+                        if (name) {
+                            // 检查名字是否已被使用
+                            if (isNameUsed(name, i)) {
+                                const errorMsg = lang === 'zh'
+                                    ? `「${name}」已經使用過了！每個名字只能用一次。`
+                                    : `"${name}" is already used! Each name can only be used once.`;
+                                alert(errorMsg);
+                                input.focus();
+                                return;
+                            }
+                            cells[i] = { marked: true, name };
+                            render();
+                        } else {
+                            cell.classList.remove('flipped');
+                        }
+                    };
+
+                    cancelBtn.onclick = () => cell.classList.remove('flipped');
+
+                    input.onkeydown = e => {
+                        if (e.key === 'Enter') confirmBtn.click();
+                        if (e.key === 'Escape') cancelBtn.click();
+                    };
+                }
+
+                grid.appendChild(cell);
+            });
+        }
+
+        function checkBingo() {
+            const marked = new Set(Object.keys(cells).map(k => parseInt(k)).filter(k => cells[k].marked));
+
+            for (let i = 0; i < 5; i++) {
+                let row = 0, col = 0;
+                for (let j = 0; j < 5; j++) {
+                    if (marked.has(i * 5 + j)) row++;
+                    if (marked.has(j * 5 + i)) col++;
+                }
+                if (row === 5 || col === 5) return showWinner();
+            }
+
+            let d1 = 0, d2 = 0;
+            for (let i = 0; i < 5; i++) {
+                if (marked.has(i * 6)) d1++;
+                if (marked.has((i + 1) * 4)) d2++;
+            }
+            if (d1 === 5 || d2 === 5) return showWinner();
+
+            alert(i18n[lang].noBingo);
+        }
+
+        function showWinner() {
+            document.getElementById('overlay').classList.add('show');
+            document.getElementById('winnerModal').classList.add('show');
+        }
+
+        function closeWinner() {
+            document.getElementById('overlay').classList.remove('show');
+            document.getElementById('winnerModal').classList.remove('show');
+        }
+
+        function shuffleBoard() {
+            const confirmText = i18n[lang].confirmShuffle;
+            if (confirm(confirmText)) {
+                // 增加局数
+                shuffleCount++;
+                document.getElementById('shuffle-count').textContent = shuffleCount;
+
+                // 添加淡出效果
+                const grid = document.getElementById('bingoGrid');
+                grid.style.opacity = '0';
+                grid.style.transform = 'scale(0.95)';
+                grid.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+
+                // 等待动画完成后重新初始化
+                setTimeout(() => {
+                    init();
+                    // 淡入效果
+                    grid.style.opacity = '1';
+                    grid.style.transform = 'scale(1)';
+                }, 300);
+            }
+        }
+
+        function resetBoard() {
+            try {
+                const confirmText = (i18n[lang] && i18n[lang].confirmReset) || '確定要清空所有標記咩？';
+                const userConfirmed = confirm(confirmText);
+                if (userConfirmed) {
+                    const grid = document.getElementById('bingoGrid');
+                    grid.style.transition = 'transform 0.2s ease-out';
+                    grid.style.transform = 'scale(0.98)';
+
+                    setTimeout(() => {
+                        cells = { 12: { marked: true, name: '' } };
+                        render();
+                        grid.style.transform = 'scale(1)';
+                    }, 200);
+                }
+            } catch (error) {
+                console.error('Reset error:', error);
+                alert('重置出错：' + error.message);
+            }
+        }
+
+        // 初始化游戏
+        try {
+            init();
+        } catch (error) {
+            console.error('初始化错误:', error);
+        }
+    </script>
+</body>
+</html>

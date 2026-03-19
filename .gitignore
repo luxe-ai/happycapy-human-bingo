@@ -1,0 +1,19 @@
+# Temporary files
+tmp/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# User uploads (optional - remove if you want to track uploads)
+uploads/
