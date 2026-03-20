@@ -609,6 +609,62 @@
             line-height: 1.6;
         }
 
+        /* Flow steps */
+        .flow-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .flow-step {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .step-num {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--orange-primary), var(--orange-light));
+            color: white;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(255, 107, 53, 0.35);
+        }
+
+        .step-body {
+            flex: 1;
+            padding-top: 4px;
+        }
+
+        .step-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 2px;
+        }
+
+        .step-desc {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            line-height: 1.55;
+        }
+
+        .step-connector {
+            width: 2px;
+            height: 10px;
+            background: linear-gradient(to bottom, var(--peach), transparent);
+            margin-left: 15px;
+        }
+
         /* Reward section heading */
         .reward-section-title {
             font-family: 'Fredoka', sans-serif;
@@ -797,18 +853,44 @@
         <div class="rules">
             <h2 class="rules-title" id="rulesTitle">📋 遊戲規則</h2>
             <div id="rulesContainer">
-                <ul class="rules-list">
-                    <li>點擊卡片翻轉，輸入符合條件嘅朋友名字</li>
-                    <li>已標記嘅卡片再點一下可以取消標記</li>
-                    <li>完成橫線、直線或對角線即可賓果</li>
-                    <li>每個格子中嘅名字需要介紹真實故事，唔可以亂編</li>
-                </ul>
+                <div class="flow-steps">
+                    <div class="flow-step">
+                        <div class="step-num">1</div>
+                        <div class="step-body">
+                            <div class="step-title">👥 組隊</div>
+                            <div class="step-desc">主持人將所有人分成4人小組，呢個係你嘅起始隊伍。</div>
+                        </div>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="flow-step">
+                        <div class="step-num">2</div>
+                        <div class="step-body">
+                            <div class="step-title">🎲 洗牌</div>
+                            <div class="step-desc">所有人打開遊戲頁面。主持人喊「開始！」後大家一齊瘋狂點擊洗牌，主持人喊「停！」時同步停下，立即截圖——呢個就係你嘅專屬 Bingo 卡！</div>
+                        </div>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="flow-step">
+                        <div class="step-num">3</div>
+                        <div class="step-body">
+                            <div class="step-title">🚀 出擊</div>
+                            <div class="step-desc">帶住你嘅 Bingo 卡四處搵人！搵到符合格子條件嘅人，翻開格子填上佢哋嘅名字。唔可以亂填——格子入面嘅名字要係真實嘅！</div>
+                        </div>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="flow-step">
+                        <div class="step-num">4</div>
+                        <div class="step-body">
+                            <div class="step-title">🏆 驗收</div>
+                            <div class="step-desc">完成一條線之後，點擊「檢查賓果」，立即截圖發俾主持人。達成賓果嘅隊伍需派代表向大家分享格子上每個人嘅真實故事。</div>
+                        </div>
+                    </div>
+                </div>
                 <div class="reward-section-title">💰 獎勵機制</div>
-                <ul class="rules-list">
+                <ul class="rules-list" style="gap: 8px;">
                     <li class="reward-item">🎁 第一個達成賓果並截圖嘅隊伍（限時5分鐘）每人獲得額外 500 credit</li>
                     <li class="reward-item">🏆 達成賓果數量最多嘅隊伍每人獲得額外 200 credit</li>
                     <li class="reward-item">✨ 其他達成賓果嘅隊伍每人都可獲得 200 credit</li>
-                    <li class="reward-item">🎤 達成賓果嘅隊伍需派出代表，向大家分享賓果格子上每項事蹟嘅真實故事</li>
                 </ul>
             </div>
         </div>
@@ -849,15 +931,16 @@
                 confirmReset: '確定要清空所有標記咩？',
                 gamePrefix: '第',
                 gameSuffix: '局',
-                rules: [
-                    '點擊卡片翻轉，輸入符合條件嘅朋友名字',
-                    '已標記嘅卡片再點一下可以取消標記',
-                    '完成橫線、直線或對角線即可賓果',
-                    '每個格子中嘅名字需要介紹真實故事，唔可以亂編',
+                steps: [
+                    { title: '👥 組隊', desc: '主持人將所有人分成4人小組，呢個係你嘅起始隊伍。' },
+                    { title: '🎲 洗牌', desc: '所有人打開遊戲頁面。主持人喊「開始！」後大家一齊瘋狂點擊洗牌，主持人喊「停！」時同步停下，立即截圖——呢個就係你嘅專屬 Bingo 卡！' },
+                    { title: '🚀 出擊', desc: '帶住你嘅 Bingo 卡四處搵人！搵到符合格子條件嘅人，翻開格子填上佢哋嘅名字。唔可以亂填——格子入面嘅名字要係真實嘅！' },
+                    { title: '🏆 驗收', desc: '完成一條線之後，點擊「檢查賓果」，立即截圖發俾主持人。達成賓果嘅隊伍需派代表向大家分享格子上每個人嘅真實故事。' }
+                ],
+                rewards: [
                     '🎁 第一個達成賓果並截圖嘅隊伍（限時5分鐘）每人獲得額外 500 credit',
                     '🏆 達成賓果數量最多嘅隊伍每人獲得額外 200 credit',
-                    '✨ 其他達成賓果嘅隊伍每人都可獲得 200 credit',
-                    '🎤 達成賓果嘅隊伍需派出代表，向大家分享賓果格子上每項事蹟嘅真實故事'
+                    '✨ 其他達成賓果嘅隊伍每人都可獲得 200 credit'
                 ]
             },
             en: {
@@ -879,15 +962,16 @@
                 confirmReset: 'Clear all marks?',
                 gamePrefix: 'Round',
                 gameSuffix: '',
-                rules: [
-                    'Click a card to flip and enter a friend\'s name who matches',
-                    'Click a marked card again to unmark it',
-                    'Complete a row, column, or diagonal to win',
-                    'Each name must share their real story - no making things up!',
+                steps: [
+                    { title: '👥 Form Teams', desc: 'The host splits everyone into groups of 4. This is your starting team.' },
+                    { title: '🎲 Shuffle!', desc: 'Everyone opens the game page. When the host says "Go!", start mashing the Shuffle button. When the host says "Stop!" — freeze and screenshot your board. That\'s your unique Bingo card!' },
+                    { title: '🚀 Go Mingle', desc: 'Walk around with your Bingo card and find people who match your squares. Flip a card and enter their name. No making things up — it has to be real!' },
+                    { title: '🏆 Claim Victory', desc: 'Complete a line, hit "Check Bingo", screenshot immediately and send to the host. Winning teams must send a rep to share the real story behind each square.' }
+                ],
+                rewards: [
                     '🎁 First team to bingo + screenshot (within 5 min) gets +500 credits each',
                     '🏆 Team with the most bingos gets +200 credits each',
-                    '✨ All other teams that achieve bingo get +200 credits each',
-                    '🎤 Winning teams must present: share the real story behind each item on their bingo line'
+                    '✨ All other teams that achieve bingo get +200 credits each'
                 ]
             }
         };
@@ -967,13 +1051,23 @@
 
             const rulesContainer = document.getElementById('rulesContainer');
             const rewardTitle = lang === 'zh' ? '💰 獎勵機制' : '💰 Rewards';
-            const basicRules = t.rules.slice(0, 4);
-            const rewardRules = t.rules.slice(4);
+
+            const stepsHtml = t.steps.map((step, i) =>
+                `<div class="flow-step">
+                    <div class="step-num">${i + 1}</div>
+                    <div class="step-body">
+                        <div class="step-title">${step.title}</div>
+                        <div class="step-desc">${step.desc}</div>
+                    </div>
+                </div>${i < t.steps.length - 1 ? '<div class="step-connector"></div>' : ''}`
+            ).join('');
+
+            const rewardsHtml = t.rewards.map(r => `<li class="reward-item">${r}</li>`).join('');
 
             rulesContainer.innerHTML =
-                `<ul class="rules-list">${basicRules.map(rule => `<li>${rule}</li>`).join('')}</ul>` +
+                `<div class="flow-steps">${stepsHtml}</div>` +
                 `<div class="reward-section-title">${rewardTitle}</div>` +
-                `<ul class="rules-list" style="gap: 8px;">${rewardRules.map(rule => `<li class="reward-item">${rule}</li>`).join('')}</ul>`;
+                `<ul class="rules-list" style="gap: 8px;">${rewardsHtml}</ul>`;
         }
 
         function init() {
