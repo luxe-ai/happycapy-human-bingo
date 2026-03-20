@@ -385,16 +385,12 @@
 
         .cell-text {
             font-family: 'Fredoka', sans-serif;
-            font-size: clamp(1rem, 2vw, 1.3rem);
+            font-size: clamp(1.15rem, 2.2vw, 1.5rem);
             font-weight: 600;
             line-height: 1.4;
             color: inherit;
             word-wrap: break-word;
             max-width: 100%;
-        }
-
-        html[lang="en"] .cell-text {
-            font-size: clamp(1.1rem, 2.2vw, 1.4rem);
         }
 
         .cell-name {
@@ -601,7 +597,7 @@
             position: relative;
             color: var(--text-gray);
             line-height: 1.6;
-            font-size: 0.95rem;
+            font-size: 1.05rem;
         }
 
         .rules-list li::before {
@@ -609,13 +605,25 @@
             position: absolute;
             left: 8px;
             color: var(--orange-primary);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Reward section heading */
+        .reward-section-title {
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--orange-primary);
+            margin-top: 16px;
+            margin-bottom: 4px;
+            padding-left: 4px;
         }
 
         /* Highlight reward rules */
-        .rules-list li:nth-child(n+6) {
+        .rules-list li.reward-item {
             background: linear-gradient(135deg, rgba(255, 107, 53, 0.08) 0%, rgba(255, 181, 160, 0.08) 100%);
-            padding: 12px 12px 12px 28px;
+            padding: 10px 12px 10px 28px;
             margin-left: -12px;
             margin-right: -12px;
             border-radius: 12px;
@@ -623,8 +631,8 @@
             color: var(--text-dark);
         }
 
-        .rules-list li:nth-child(n+6)::before {
-            left: 20px;
+        .rules-list li.reward-item::before {
+            left: 16px;
         }
 
         /* Responsive */
@@ -654,22 +662,22 @@
             }
 
             .cell-text {
-                font-size: 0.8rem;
+                font-size: 1rem;
             }
 
             .back-title {
-                font-size: 0.6rem;
-                margin-bottom: 1px;
+                font-size: 0.75rem;
+                margin-bottom: 2px;
             }
 
             .name-input {
-                font-size: 0.7rem;
-                padding: 5px 6px;
+                font-size: 0.85rem;
+                padding: 6px 8px;
             }
 
             .back-btn {
-                font-size: 0.65rem;
-                padding: 5px 6px;
+                font-size: 0.8rem;
+                padding: 6px 8px;
             }
 
             .controls {
@@ -719,27 +727,27 @@
             }
 
             .cell-text {
-                font-size: 0.7rem;
+                font-size: 0.95rem;
             }
 
             .cell-name {
-                font-size: 0.65rem;
+                font-size: 0.72rem;
                 margin-top: 4px;
             }
 
             .back-title {
-                font-size: 0.55rem;
-                line-height: 1.1;
+                font-size: 0.72rem;
+                line-height: 1.2;
             }
 
             .name-input {
-                font-size: 0.65rem;
-                padding: 4px 5px;
+                font-size: 0.82rem;
+                padding: 5px 7px;
             }
 
             .back-btn {
-                font-size: 0.6rem;
-                padding: 4px 5px;
+                font-size: 0.75rem;
+                padding: 5px 7px;
             }
 
             .checkmark {
@@ -788,13 +796,21 @@
 
         <div class="rules">
             <h2 class="rules-title" id="rulesTitle">📋 遊戲規則</h2>
-            <ul class="rules-list" id="rulesList">
-                <li>點擊卡片翻轉，輸入符合條件嘅朋友名字</li>
-                <li>已標記嘅卡片再點一下可以取消標記</li>
-                <li>完成橫線、直線或對角線即可賓果</li>
-                <li>中間格仔係免費格，自動標記</li>
-                <li>同朋友交流，認識更多新朋友！</li>
-            </ul>
+            <div id="rulesContainer">
+                <ul class="rules-list">
+                    <li>點擊卡片翻轉，輸入符合條件嘅朋友名字</li>
+                    <li>已標記嘅卡片再點一下可以取消標記</li>
+                    <li>完成橫線、直線或對角線即可賓果</li>
+                    <li>每個格子中嘅名字需要介紹真實故事，唔可以亂編</li>
+                </ul>
+                <div class="reward-section-title">💰 獎勵機制</div>
+                <ul class="rules-list">
+                    <li class="reward-item">🎁 第一個達成賓果並截圖嘅隊伍（限時5分鐘）每人獲得額外 500 credit</li>
+                    <li class="reward-item">🏆 達成賓果數量最多嘅隊伍每人獲得額外 200 credit</li>
+                    <li class="reward-item">✨ 其他達成賓果嘅隊伍每人都可獲得 200 credit</li>
+                    <li class="reward-item">🎤 達成賓果嘅隊伍需派出代表，向大家分享賓果格子上每項事蹟嘅真實故事</li>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -840,7 +856,8 @@
                     '每個格子中嘅名字需要介紹真實故事，唔可以亂編',
                     '🎁 第一個達成賓果並截圖嘅隊伍（限時5分鐘）每人獲得額外 500 credit',
                     '🏆 達成賓果數量最多嘅隊伍每人獲得額外 200 credit',
-                    '✨ 其他達成賓果嘅隊伍每人都可獲得 200 credit'
+                    '✨ 其他達成賓果嘅隊伍每人都可獲得 200 credit',
+                    '🎤 達成賓果嘅隊伍需派出代表，向大家分享賓果格子上每項事蹟嘅真實故事'
                 ]
             },
             en: {
@@ -867,9 +884,10 @@
                     'Click a marked card again to unmark it',
                     'Complete a row, column, or diagonal to win',
                     'Each name must share their real story - no making things up!',
-                    '🎁 First team to achieve bingo with screenshot (within 5 min) gets 500 credits per person',
-                    '🏆 Team with the most bingos gets 200 credits per person',
-                    '✨ Other teams that achieve bingo also get 200 credits per person'
+                    '🎁 First team to bingo + screenshot (within 5 min) gets +500 credits each',
+                    '🏆 Team with the most bingos gets +200 credits each',
+                    '✨ All other teams that achieve bingo get +200 credits each',
+                    '🎤 Winning teams must present: share the real story behind each item on their bingo line'
                 ]
             }
         };
@@ -947,15 +965,15 @@
             document.getElementById('game-label-prefix').textContent = t.gamePrefix;
             document.getElementById('game-label-suffix').textContent = t.gameSuffix;
 
-            const rulesList = document.getElementById('rulesList');
+            const rulesContainer = document.getElementById('rulesContainer');
+            const rewardTitle = lang === 'zh' ? '💰 獎勵機制' : '💰 Rewards';
             const basicRules = t.rules.slice(0, 4);
             const rewardRules = t.rules.slice(4);
-            const rewardTitle = lang === 'zh' ? '💰 獎勵機制' : '💰 Rewards';
 
-            rulesList.innerHTML =
-                basicRules.map(rule => `<li>${rule}</li>`).join('') +
-                `<li style="list-style: none; margin: 16px 0 8px -28px; padding: 0; font-weight: 700; color: var(--orange-primary); font-size: 1.05rem;">${rewardTitle}</li>` +
-                rewardRules.map(rule => `<li>${rule}</li>`).join('');
+            rulesContainer.innerHTML =
+                `<ul class="rules-list">${basicRules.map(rule => `<li>${rule}</li>`).join('')}</ul>` +
+                `<div class="reward-section-title">${rewardTitle}</div>` +
+                `<ul class="rules-list" style="gap: 8px;">${rewardRules.map(rule => `<li class="reward-item">${rule}</li>`).join('')}</ul>`;
         }
 
         function init() {
