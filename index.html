@@ -984,7 +984,11 @@
             { zh: '參加過黑客松', en: 'Survived a hackathon' },
             { zh: '做過創業/副業', en: 'Built a side project' },
             { zh: '內向嘅人', en: 'Total introvert' },
-            { zh: '鍾意飲咖啡', en: 'Runs on coffee' }
+            { zh: '鍾意飲咖啡', en: 'Runs on coffee' },
+            { zh: '寫過blog或文章', en: 'Has written a blog post' },
+            { zh: '養寵物', en: 'Has a pet at home' },
+            { zh: '做過演講/分享', en: 'Has given a talk' },
+            { zh: '識彈樂器', en: 'Plays an instrument' }
         ];
 
         function shuffle(arr) {
@@ -1063,7 +1067,7 @@
 
         function init() {
             // 洗牌并创建固定的索引数组 (4x4 = 16格子)
-            boardIndices = shuffle([...Array(16).keys()]);
+            boardIndices = shuffle([...Array(prompts.length).keys()]).slice(0, 16);
             cells = {};
             render();
         }
