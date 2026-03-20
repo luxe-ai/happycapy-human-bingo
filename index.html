@@ -858,21 +858,13 @@
                     <div class="flow-step">
                         <div class="step-num">1</div>
                         <div class="step-body">
-                            <div class="step-title">👥 組隊</div>
-                            <div class="step-desc">主持人將所有人分成4人小組，呢個係你嘅起始隊伍。</div>
-                        </div>
-                    </div>
-                    <div class="step-connector"></div>
-                    <div class="flow-step">
-                        <div class="step-num">2</div>
-                        <div class="step-body">
                             <div class="step-title">🎲 洗牌</div>
                             <div class="step-desc">所有人打開遊戲頁面。主持人喊「開始！」後大家一齊瘋狂點擊洗牌，主持人喊「停！」時同步停下，立即截圖——呢個就係你嘅專屬 Bingo 卡！</div>
                         </div>
                     </div>
                     <div class="step-connector"></div>
                     <div class="flow-step">
-                        <div class="step-num">3</div>
+                        <div class="step-num">2</div>
                         <div class="step-body">
                             <div class="step-title">🚀 出擊</div>
                             <div class="step-desc">帶住你嘅 Bingo 卡四處搵人！搵到符合格子條件嘅人，翻開格子填上佢哋嘅名字。唔可以亂填——格子入面嘅名字要係真實嘅！</div>
@@ -880,18 +872,18 @@
                     </div>
                     <div class="step-connector"></div>
                     <div class="flow-step">
-                        <div class="step-num">4</div>
+                        <div class="step-num">3</div>
                         <div class="step-body">
                             <div class="step-title">🏆 驗收</div>
-                            <div class="step-desc">每次完成一條線，立即截圖留底，稍後出示俾主持人核實。達成賓果嘅隊伍需向大家分享格子上每個名字背後嘅真實故事。</div>
+                            <div class="step-desc">完成一條線後，立即舉手向主持人示意！達成賓果後需向大家分享格子上每個名字背後嘅真實故事。</div>
                         </div>
                     </div>
                 </div>
                 <div class="reward-section-title">💰 獎勵機制</div>
                 <ul class="rules-list" style="gap: 8px;">
-                    <li class="reward-item">🎁 限時5分鐘內，第一個達成賓果並出示截圖嘅隊伍，每人獲得額外 500 credit</li>
-                    <li class="reward-item">🏆 達成賓果數量最多嘅隊伍，每人獲得額外 200 credit</li>
-                    <li class="reward-item">✨ 其他達成賓果嘅隊伍，每人都可獲得 200 credit</li>
+                    <li class="reward-item">🎁 前5位達成賓果嘅人，獲得 1000 credit</li>
+                    <li class="reward-item">🏆 第6至10位達成賓果嘅人，獲得 500 credit</li>
+                    <li class="reward-item">✨ 其他達成賓果嘅人，獲得小禮品一份</li>
                 </ul>
             </div>
         </div>
@@ -933,15 +925,14 @@
                 gamePrefix: '第',
                 gameSuffix: '局',
                 steps: [
-                    { title: '👥 組隊', desc: '主持人將所有人分成4人小組，呢個係你嘅起始隊伍。' },
                     { title: '🎲 洗牌', desc: '所有人打開遊戲頁面。主持人喊「開始！」後大家一齊瘋狂點擊洗牌，主持人喊「停！」時同步停下，立即截圖——呢個就係你嘅專屬 Bingo 卡！' },
                     { title: '🚀 出擊', desc: '帶住你嘅 Bingo 卡四處搵人！搵到符合格子條件嘅人，翻開格子填上佢哋嘅名字。唔可以亂填——格子入面嘅名字要係真實嘅！' },
-                    { title: '🏆 驗收', desc: '每次完成一條線，立即截圖留底，稍後出示俾主持人核實。達成賓果嘅隊伍需向大家分享格子上每個名字背後嘅真實故事。' }
+                    { title: '🏆 驗收', desc: '完成一條線後，立即舉手向主持人示意！達成賓果後需向大家分享格子上每個名字背後嘅真實故事。' }
                 ],
                 rewards: [
-                    '🎁 限時5分鐘內，第一個達成賓果並出示截圖嘅隊伍，每人獲得額外 500 credit',
-                    '🏆 達成賓果數量最多嘅隊伍，每人獲得額外 200 credit',
-                    '✨ 其他達成賓果嘅隊伍，每人都可獲得 200 credit'
+                    '🎁 前5位達成賓果嘅人，獲得 1000 credit',
+                    '🏆 第6至10位達成賓果嘅人，獲得 500 credit',
+                    '✨ 其他達成賓果嘅人，獲得小禮品一份'
                 ]
             },
             en: {
@@ -964,15 +955,14 @@
                 gamePrefix: 'Round',
                 gameSuffix: '',
                 steps: [
-                    { title: '👥 Form Teams', desc: 'The host splits everyone into groups of 4. This is your starting team.' },
                     { title: '🎲 Shuffle!', desc: 'Everyone opens the game page. When the host says "Go!", start mashing the Shuffle button. When the host says "Stop!" — freeze and screenshot your board. That\'s your unique Bingo card!' },
                     { title: '🚀 Go Mingle', desc: 'Walk around with your Bingo card and find people who match your squares. Flip a card and enter their name. No making things up — it has to be real!' },
-                    { title: '🏆 Claim Victory', desc: 'Every time you complete a line, screenshot it right away — you\'ll need to show the host later. Teams that achieve bingo must share the real story behind each name on their winning line.' }
+                    { title: '🏆 Claim Victory', desc: 'Complete a line? Raise your hand to let the host know! Then share the real story behind each name on your winning line.' }
                 ],
                 rewards: [
-                    '🎁 Within 5 min: first team to show the host a bingo screenshot gets +500 credits each',
-                    '🏆 Team with the most bingos gets +200 credits each',
-                    '✨ All other teams that achieve bingo get +200 credits each'
+                    '🎁 First 5 to get bingo: 1000 credits each',
+                    '🏆 6th–10th to get bingo: 500 credits each',
+                    '✨ Everyone else who gets bingo: a small gift'
                 ]
             }
         };
